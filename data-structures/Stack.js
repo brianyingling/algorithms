@@ -13,6 +13,10 @@ function Stack() {
     this.head;
 }
 
+Stack.prototype.peek = function() {
+    return this.head;
+}
+
 Stack.prototype.push = function(item) {
     if (!this.head) {
         this.head = new Node(item, null);
