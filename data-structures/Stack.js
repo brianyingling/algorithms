@@ -14,7 +14,7 @@ function Stack() {
 }
 
 Stack.prototype.peek = function() {
-    return this.head;
+    return this.head && this.head.item;
 }
 
 Stack.prototype.push = function(item) {
@@ -41,6 +41,9 @@ stack.push(2);
 stack.push(3);
 stack.push(4);
 console.log('stack:', stack);
+
+console.log('peek:', stack.peek());
+
 
 // should be 4
 var popped = stack.pop();
@@ -73,3 +76,50 @@ stack.push(2);
 stack.push(3);
 stack.push(4);
 console.log('stack:', stack);
+
+
+// function isBalanced(str) {
+//     var OPEN = '(';
+//     var CLOSE = ')';
+//     var stack = new Stack();
+//     for (var i = 0; i < str.length; i++) {
+//         var char = str[i];
+//         if (!stack.length) {
+//             if (char === CLOSE)     
+//                 return false;
+//             else if (char === OPEN) 
+//                 stack.push(char);
+//         }
+//         else {
+//             if (char === stack.peek())
+//                 stack.push(char);
+//             else if (stack.peek() === OPEN && char === CLOSE)
+//                 stack.pop();
+//         }
+//     }
+//     return !stack.length;
+// }
+
+function isBalanced(str) {
+    var stack = new Stack();
+    var open = {
+        '[' : ']',
+        '{' : '}',
+        '(' : ')'
+    };
+    var closed = {
+        ']': true,
+        '}': true,
+        ')': true
+    };
+    for (var i = 0; i < str.length; i++) {
+        var char = str[i];
+        if (open[char]) {
+            stack.push(char);
+        } 
+        else if (closed[char]) {
+            if (open[stack.pop()] !== char) return false;
+        }
+    }
+    return stack.length === 0;
+}
