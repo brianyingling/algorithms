@@ -11,11 +11,9 @@ InsertionSort.prototype.sort = function() {
     for (var i = 0; i < this.items.length; i++) {
         var j = i;
         while (j > 0 && this.items[j-1] > this.items[j]) {
-            if (this.items[j-1] > this.items[j]) {
-                var temp = this.items[j-1];
-                this.items[j-1] = this.items[j];
-                this.items[j] = temp;
-            }
+            var temp = this.items[j-1];
+            this.items[j-1] = this.items[j];
+            this.items[j] = temp;
             j--;
         }
     }
